@@ -13,12 +13,25 @@
 </head>
 <body>
     <div id="loader" class="loader">
-        <div class="loader-spinner"></div>
+        <div class="loader-cube">
+            <div class="cube-face front"></div>
+            <div class="cube-face back"></div>
+            <div class="cube-face left"></div>
+            <div class="cube-face right"></div>
+            <div class="cube-face top"></div>
+            <div class="cube-face bottom"></div>
+        </div>
     </div>
+
+    <!-- 3D Particle Field -->
+    <canvas id="particle-canvas"></canvas>
 
     <!-- Background Ambience -->
     <div class="bg-ambience"></div>
     <div class="noise-overlay"></div>
+
+    <!-- Mouse glow follower -->
+    <div class="mouse-glow" id="mouse-glow"></div>
 
     <nav class="navbar" id="navbar">
         <div class="nav-container">
