@@ -845,3 +845,57 @@ footer {
     justify-content: center;
   }
 }
+
+/* ========================================
+   NEW VISUAL EFFECTS (PARTICLES & GLOW)
+   ======================================== */
+.particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -3;
+}
+
+.mouse-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(216, 160, 92, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  mix-blend-mode: screen;
+}
+.mouse-glow.visible {
+  opacity: 1;
+}
+
+/* Navbar Scroll Effect */
+.navbar.scrolled {
+  background: rgba(11, 12, 16, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(216, 160, 92, 0.3);
+}
+
+/* ========================================
+   ANIMATIONS (3D REVEAL & TILT)
+   ======================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px) translateZ(-50px) rotateX(10deg);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) translateZ(0) rotateX(0);
+}
+
+.tilt-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
