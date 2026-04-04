@@ -182,6 +182,7 @@ const siteData = {
             "The continuous interior curve of a dry-stacked corbelled roof."
         ]
     }
+};
 
 // ========================================
 // DOM ELEMENTS
@@ -197,15 +198,16 @@ const appRoot = document.getElementById('app-root');
     // ========================================
     // 3D PARTICLE FIELD
     // ========================================
-    const ctx = particleCanvas.getContext('2d');
-    let particles =[];
+    const ctx = particleCanvas ? particleCanvas.getContext('2d') : null;
+    let particles = [];
     let mouseX = 0, mouseY = 0;
     const PARTICLE_COUNT = 60;
 
     function resizeCanvas() {
+        if (!particleCanvas) return;
         particleCanvas.width = window.innerWidth;
-particleCanvas.height = window.innerHeight;
-}
+        particleCanvas.height = window.innerHeight;
+    }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
@@ -247,9 +249,12 @@ class Particle {
     }
 }
 
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push(new Particle());
-}
+    if (particleCanvas) {
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new Particle());
+        }
+        animateParticles();
+    }
 
 function animateParticles() {
     ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
@@ -276,9 +281,10 @@ function animateParticles() {
         p.update();
         p.draw();
     });
-    requestAnimationFrame(animateParticles);
+    if (particleCanvas) {
+        requestAnimationFrame(animateParticles);
+    }
 }
-animateParticles();
 
 // ========================================
 // MOUSE GLOW FOLLOWER
@@ -288,16 +294,21 @@ document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    if (!glowActive) {
-        mouseGlow.classList.add('visible');
-        glowActive = true;
+    if (mouseGlow) {
+        mouseGlow.style.left = e.clientX + 'px';
+        mouseGlow.style.top = e.clientY + 'px';
+
+        if (!glowActive) {
+            mouseGlow.classList.add('visible');
+            glowActive = true;
+        }
     }
-    mouseGlow.style.left = e.clientX + 'px';
-    mouseGlow.style.top = e.clientY + 'px';
 });
 document.addEventListener('mouseleave', () => {
-    mouseGlow.classList.remove('visible');
-    glowActive = false;
+    if (mouseGlow) {
+        mouseGlow.classList.remove('visible');
+        glowActive = false;
+    }
 });
 
 // ========================================
@@ -604,7 +615,77 @@ function renderGlossary() {
             </div>
         </div>
     `;
+};
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+    buildNavigation();
+
+    // Hide loader
+    setTimeout(() => {
+        loader.classList.add('hidden');
+    }, 800);
+
+    // Initial Route
+    handleRoute();
+});
+
+// Mobile menu toggle
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    navLinksContainer.classList.toggle('active');
+    document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : '';
+});
+
+function buildNavigation() {
+    siteData.navigation_menu.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${item.id}" class="nav-link" data-id="${item.id}">${item.label}</a>`;
+        navLinksContainer.appendChild(li);
+    });
 }
 
+// Router
+window.addEventListener('hashchange', () => {
+    loader.classList.remove('hidden');
+    appRoot.style.opacity = 0;
 
+    setTimeout(() => {
+        handleRoute();
+        loader.classList.add('hidden');
+        navLinksContainer.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+    }, 400);
+});
 
+function handleRoute() {
+    let hash = window.location.hash.replace('#', '') || 'home';
+
+    // Update active nav
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.id === hash);
+    });
+
+    let htmlBody = '';
+
+    switch (hash) {
+        case 'home': htmlBody = renderHome(); break;
+        case 'techniques': htmlBody = renderTechniques(); break;
+        case 'case-studies': htmlBody = renderCaseStudies(); break;
+        case 'timeline': htmlBody = renderTimeline(); break;
+        case 'gallery': htmlBody = renderGallery(); break;
+        case 'glossary': htmlBody = renderGlossary(); break;
+        default: htmlBody = `<div class="page-container page-header"><h1>Section Not Found</h1></div>`;
+    }
+
+    appRoot.innerHTML = htmlBody;
+
+    // Animate enter
+    setTimeout(() => {
+        appRoot.style.opacity = 1;
+        window.scrollTo(0, 0);
+        initScrollReveal();
+        init3DTilt();
+    }, 60);
+}
