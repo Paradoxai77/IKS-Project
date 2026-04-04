@@ -182,141 +182,24 @@ const siteData = {
         "The continuous interior curve of a dry-stacked corbelled roof."
     ]
   }
+};
 
-// ========================================
-// DOM ELEMENTS
-// ========================================
+// DOM Elements
 const appRoot = document.getElementById('app-root');
 const navLinksContainer = document.getElementById('nav-links');
 const loader = document.getElementById('loader');
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mouseGlow = document.getElementById('mouse-glow');
-const particleCanvas = document.getElementById('particle-canvas');
-const navbar = document.getElementById('navbar');
 
-// ========================================
-// 3D PARTICLE FIELD
-// ========================================
-const ctx = particleCanvas.getContext('2d');
-let particles = [];
-let mouseX = 0, mouseY = 0;
-const PARTICLE_COUNT = 60;
-
-function resizeCanvas() {
-    particleCanvas.width = window.innerWidth;
-    particleCanvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-class Particle {
-    constructor() {
-        this.reset();
-    }
-    reset() {
-        this.x = Math.random() * particleCanvas.width;
-        this.y = Math.random() * particleCanvas.height;
-        this.z = Math.random() * 1000;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedY = -Math.random() * 0.3 - 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.2;
-        this.opacity = Math.random() * 0.4 + 0.1;
-    }
-    update() {
-        this.y += this.speedY;
-        this.x += this.speedX;
-        this.z -= 0.5;
-
-        // Parallax with mouse
-        const dx = (mouseX - particleCanvas.width / 2) * 0.00005 * this.z;
-        const dy = (mouseY - particleCanvas.height / 2) * 0.00005 * this.z;
-        this.x += dx;
-        this.y += dy;
-
-        if (this.y < -10 || this.z < 0) this.reset();
-        if (this.y > particleCanvas.height + 10) { this.y = -10; }
-    }
-    draw() {
-        const scale = (1000 - this.z) / 1000;
-        const r = this.size * scale;
-        const a = this.opacity * scale;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, Math.max(r, 0.3), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(216, 160, 92, ${a})`;
-        ctx.fill();
-    }
-}
-
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push(new Particle());
-}
-
-function animateParticles() {
-    ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-
-    // Draw connections between close particles
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-                const opacity = (1 - dist / 120) * 0.08;
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(216, 160, 92, ${opacity})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-            }
-        }
-    }
-
-    particles.forEach(p => {
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animateParticles);
-}
-animateParticles();
-
-// ========================================
-// MOUSE GLOW FOLLOWER
-// ========================================
-let glowActive = false;
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    if (!glowActive) {
-        mouseGlow.classList.add('visible');
-        glowActive = true;
-    }
-    mouseGlow.style.left = e.clientX + 'px';
-    mouseGlow.style.top = e.clientY + 'px';
-});
-document.addEventListener('mouseleave', () => {
-    mouseGlow.classList.remove('visible');
-    glowActive = false;
-});
-
-// ========================================
-// NAVBAR SCROLL DEPTH EFFECT
-// ========================================
-window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// ========================================
-// INITIALIZE
-// ========================================
+// Initialize
 document.addEventListener("DOMContentLoaded", () => {
     buildNavigation();
-
+    
+    // Hide loader
     setTimeout(() => {
         loader.classList.add('hidden');
-    }, 1200);
+    }, 800);
 
+    // Initial Route
     handleRoute();
 });
 
@@ -335,31 +218,30 @@ function buildNavigation() {
     });
 }
 
-// ========================================
-// ROUTER
-// ========================================
+// Router
 window.addEventListener('hashchange', () => {
     loader.classList.remove('hidden');
     appRoot.style.opacity = 0;
-
+    
     setTimeout(() => {
         handleRoute();
         loader.classList.add('hidden');
         navLinksContainer.classList.remove('active');
         mobileMenuBtn.classList.remove('active');
         document.body.style.overflow = '';
-    }, 500);
+    }, 400);
 });
 
 function handleRoute() {
     let hash = window.location.hash.replace('#', '') || 'home';
-
+    
+    // Update active nav
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.toggle('active', link.dataset.id === hash);
     });
 
     let htmlBody = '';
-
+    
     switch(hash) {
         case 'home': htmlBody = renderHome(); break;
         case 'techniques': htmlBody = renderTechniques(); break;
@@ -371,67 +253,19 @@ function handleRoute() {
     }
 
     appRoot.innerHTML = htmlBody;
-
+    
+    // Animate enter
     setTimeout(() => {
         appRoot.style.opacity = 1;
         window.scrollTo(0,0);
-        initScrollReveal();
-        init3DTilt();
-    }, 60);
+    }, 50);
 }
 
-// ========================================
-// SCROLL REVEAL — 3D ENTRANCE FROM DEPTH
-// ========================================
-function initScrollReveal() {
-    const revealEls = document.querySelectorAll('.reveal');
-    if (!revealEls.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-}
-
-// ========================================
-// 3D TILT EFFECT ON CARDS
-// ========================================
-function init3DTilt() {
-    const tiltCards = document.querySelectorAll('.tilt-3d');
-    if (window.matchMedia('(hover: none)').matches) return; // skip on touch
-
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateY = ((x - centerX) / centerX) * 8;
-            const rotateX = ((centerY - y) / centerY) * 6;
-
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        });
-    });
-}
-
-// ========================================
-// RENDER FUNCTIONS
-// ========================================
+// Render Functions
 function renderHome() {
     const data = siteData.pages.home;
-    const cardsHtml = data.quick_links.map((q, i) => `
-        <div class="glass-card tilt-3d reveal" style="transition-delay: ${i * 0.15}s">
+    const cardsHtml = data.quick_links.map(q => `
+        <div class="glass-card">
             <h3>${q.label}</h3>
             <p>${q.description}</p>
             <br/>
@@ -447,7 +281,7 @@ function renderHome() {
             </div>
         </section>
         <section class="page-container" style="padding-top: 0;">
-            <div class="article-content reveal" style="text-align: center; margin-bottom: 4rem;">
+            <div class="article-content" style="text-align: center; margin-bottom: 4rem;">
                 <p>${data.intro}</p>
             </div>
             <div class="grid-3 quick-links">
@@ -460,11 +294,11 @@ function renderHome() {
 function renderTechniques() {
     const data = siteData.pages.techniques;
     const overview = siteData.pages.techniques_overview;
-
+    
     const techHtml = data.map((t, i) => {
         const stepsHtml = t.step_by_step.map(step => `<li>${step}</li>`).join('');
         return `
-            <div class="glass-card tilt-3d reveal" style="margin-bottom: 3rem; transition-delay: ${i*0.1}s">
+            <div class="glass-card" style="margin-bottom: 3rem; animation-delay: ${i*0.1}s">
                 <h2 style="color:var(--accent); font-size: 2rem; margin-bottom: 1rem;">${t.name}</h2>
                 <div class="grid-2">
                     <div>
@@ -487,10 +321,10 @@ function renderTechniques() {
 
     return `
         <div class="page-container">
-            <div class="page-header reveal">
+            <div class="page-header">
                 <h1>${overview.title}</h1>
                 <p>${overview.body}</p>
-                <div class="reveal" style="margin-top:2rem; padding: 1.5rem; border: 1px solid var(--accent); border-radius: 8px; background: rgba(216,160,92,0.05)">
+                <div style="margin-top:2rem; padding: 1.5rem; border: 1px solid var(--accent); border-radius: 8px; background: rgba(216,160,92,0.05)">
                     <em>${overview.sidebar}</em>
                 </div>
             </div>
@@ -503,19 +337,19 @@ function renderTechniques() {
 
 function renderCaseStudies() {
     const data = siteData.pages.case_studies;
-    const cardsHtml = data.map((c, i) => `
-        <div class="glass-card tilt-3d reveal" style="transition-delay: ${i * 0.12}s">
+    const cardsHtml = data.map(c => `
+        <div class="glass-card">
             <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">${c.title}</h2>
             <div style="margin-bottom: 1.5rem;">
                 <h4 style="color:#fff; margin-top:1rem;">Historical Context</h4>
                 <p>${c.historical_context}</p>
-
+                
                 <h4 style="color:#fff; margin-top:1rem;">Specific Joinery</h4>
                 <p>${c.specific_joinery}</p>
-
+                
                 <h4 style="color:#fff; margin-top:1rem;">Structural Analysis</h4>
                 <p>${c.structural_analysis}</p>
-
+                
                 <h4 style="color:var(--accent); margin-top:1rem;">Conservation Challenges</h4>
                 <p>${c.conservation_challenges}</p>
             </div>
@@ -524,7 +358,7 @@ function renderCaseStudies() {
 
     return `
         <div class="page-container">
-            <div class="page-header reveal">
+            <div class="page-header">
                 <h1>Monument Case Studies</h1>
                 <p>In-depth architectural analysis of the subcontinent's most iconic structural achievements.</p>
             </div>
@@ -537,22 +371,19 @@ function renderCaseStudies() {
 
 function renderTimeline() {
     const data = siteData.pages.timeline;
-    const timelineHtml = data.map((item, i) => {
-        const [year, ...descParts] = item.split(': ');
-        const desc = descParts.join(': ');
+    const timelineHtml = data.map(item => {
+        const [year, desc] = item.split(': ');
         return `
-            <div class="timeline-item reveal" style="transition-delay: ${i * 0.08}s">
-                <div class="timeline-card">
-                    <h3 style="color:var(--accent); font-family:var(--font-heading);">${year}</h3>
-                    <p style="color:var(--text-light); font-size:1.05rem; margin-top:0.5rem;">${desc}</p>
-                </div>
+            <div class="timeline-item">
+                <h3 style="color:var(--accent); font-family:var(--font-heading);">${year}</h3>
+                <p style="color:var(--text-light); font-size:1.1rem;">${desc}</p>
             </div>
         `;
     }).join('');
 
     return `
         <div class="page-container">
-            <div class="page-header reveal">
+            <div class="page-header">
                 <h1>Chronology of Joinery</h1>
                 <p>The progression of lithic engineering across the subcontinent over millennia.</p>
             </div>
@@ -565,15 +396,15 @@ function renderTimeline() {
 
 function renderGallery() {
     const data = siteData.pages.gallery;
-    const html = data.map((item, i) => `
-        <div class="gallery-item tilt-3d reveal" title="${item}" style="transition-delay: ${i * 0.08}s">
+    const html = data.map(item => `
+        <div class="gallery-item" title="Placeholder Image for: ${item}">
             <p>${item}</p>
         </div>
     `).join('');
-
+    
     return `
         <div class="page-container">
-            <div class="page-header reveal">
+            <div class="page-header">
                 <h1>Visual Archive</h1>
                 <p>A collection of structural joints, tooling marks, and conservation efforts.</p>
             </div>
@@ -586,16 +417,16 @@ function renderGallery() {
 
 function renderGlossary() {
     const data = siteData.pages.glossary;
-    const html = data.map((g, i) => `
-        <div class="glossary-term reveal" style="transition-delay: ${i * 0.05}s">
+    const html = data.map(g => `
+        <div class="glossary-term">
             <span class="term-name">${g.term}</span>
             <p>${g.definition}</p>
         </div>
     `).join('');
-
+    
     return `
         <div class="page-container">
-            <div class="page-header reveal">
+            <div class="page-header">
                 <h1>Technical Glossary</h1>
                 <p>Essential terminology for historic masonry and stone conservation.</p>
             </div>
