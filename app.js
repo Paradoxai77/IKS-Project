@@ -239,6 +239,7 @@ class Particle {
         if (this.y > particleCanvas.height + 10) { this.y = -10; }
     }
     draw() {
+        if (!ctx) return;
         const scale = (1000 - this.z) / 1000;
         const r = this.size * scale;
         const a = this.opacity * scale;
@@ -619,14 +620,12 @@ function renderGlossary() {
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
-    buildNavigation();
-
-    // Hide loader
+    // Priority: ensure the site always unloads the spinner
     setTimeout(() => {
-        loader.classList.add('hidden');
-    }, 800);
+        if (loader) loader.classList.add('hidden');
+    }, 1000);
 
-    // Initial Route
+    buildNavigation();
     handleRoute();
 });
 

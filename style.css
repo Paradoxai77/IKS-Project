@@ -60,6 +60,34 @@ body {
   100% { transform: scale(1.1) translate(-2%, 3%); }
 }
 
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#mouse-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(216, 160, 92, 0.08) 0%, rgba(216, 160, 92, 0.03) 30%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  will-change: transform;
+}
+
+#mouse-glow.visible {
+  opacity: 1;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5 {
   font-family: var(--font-heading);
