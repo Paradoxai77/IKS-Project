@@ -118,7 +118,8 @@ a:hover {
 }
 .loader.hidden {
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none !important;
+  display: none;
 }
 .loader-spinner {
   width: 50px;

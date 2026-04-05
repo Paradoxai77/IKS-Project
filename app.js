@@ -188,26 +188,26 @@ const siteData = {
 // DOM ELEMENTS
 // ========================================
 const appRoot = document.getElementById('app-root');
-    const navLinksContainer = document.getElementById('nav-links');
-    const loader = document.getElementById('loader');
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mouseGlow = document.getElementById('mouse-glow');
-    const particleCanvas = document.getElementById('particle-canvas');
-    const navbar = document.getElementById('navbar');
+const navLinksContainer = document.getElementById('nav-links');
+const loader = document.getElementById('loader');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mouseGlow = document.getElementById('mouse-glow');
+const particleCanvas = document.getElementById('particle-canvas');
+const navbar = document.getElementById('navbar');
 
-    // ========================================
-    // 3D PARTICLE FIELD
-    // ========================================
-    const ctx = particleCanvas ? particleCanvas.getContext('2d') : null;
-    let particles = [];
-    let mouseX = 0, mouseY = 0;
-    const PARTICLE_COUNT = 60;
+// ========================================
+// 3D PARTICLE FIELD
+// ========================================
+const ctx = particleCanvas ? particleCanvas.getContext('2d') : null;
+let particles = [];
+let mouseX = 0, mouseY = 0;
+const PARTICLE_COUNT = 60;
 
-    function resizeCanvas() {
-        if (!particleCanvas) return;
-        particleCanvas.width = window.innerWidth;
-        particleCanvas.height = window.innerHeight;
-    }
+function resizeCanvas() {
+    if (!particleCanvas) return;
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+}
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
@@ -216,6 +216,7 @@ class Particle {
         this.reset();
     }
     reset() {
+        if (!particleCanvas) return;
         this.x = Math.random() * particleCanvas.width;
         this.y = Math.random() * particleCanvas.height;
         this.z = Math.random() * 1000;
@@ -225,6 +226,7 @@ class Particle {
         this.opacity = Math.random() * 0.4 + 0.1;
     }
     update() {
+        if (!particleCanvas) return;
         this.y += this.speedY;
         this.x += this.speedX;
         this.z -= 0.5;
@@ -250,14 +252,15 @@ class Particle {
     }
 }
 
-    if (particleCanvas) {
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push(new Particle());
-        }
-        animateParticles();
+if (particleCanvas) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
     }
+    animateParticles();
+}
 
 function animateParticles() {
+    if (!ctx || !particleCanvas) return;
     ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
 
     // Draw connections between close particles
@@ -282,9 +285,7 @@ function animateParticles() {
         p.update();
         p.draw();
     });
-    if (particleCanvas) {
-        requestAnimationFrame(animateParticles);
-    }
+    requestAnimationFrame(animateParticles);
 }
 
 // ========================================
@@ -316,81 +317,8 @@ document.addEventListener('mouseleave', () => {
 // NAVBAR SCROLL DEPTH EFFECT
 // ========================================
 window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
+    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
-
-// ========================================
-// INITIALIZE
-// ========================================
-document.addEventListener("DOMContentLoaded", () => {
-    buildNavigation();
-
-    setTimeout(() => {
-        loader.classList.add('hidden');
-    }, 1200);
-
-    handleRoute();
-});
-
-// Mobile menu toggle
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenuBtn.classList.toggle('active');
-    navLinksContainer.classList.toggle('active');
-    document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : '';
-});
-
-function buildNavigation() {
-    siteData.navigation_menu.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#${item.id}" class="nav-link" data-id="${item.id}">${item.label}</a>`;
-        navLinksContainer.appendChild(li);
-    });
-}
-
-// ========================================
-// ROUTER
-// ========================================
-window.addEventListener('hashchange', () => {
-    loader.classList.remove('hidden');
-    appRoot.style.opacity = 0;
-
-    setTimeout(() => {
-        handleRoute();
-        loader.classList.add('hidden');
-        navLinksContainer.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
-        document.body.style.overflow = '';
-    }, 500);
-});
-
-function handleRoute() {
-    let hash = window.location.hash.replace('#', '') || 'home';
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.dataset.id === hash);
-    });
-
-    let htmlBody = '';
-
-    switch (hash) {
-        case 'home': htmlBody = renderHome(); break;
-        case 'techniques': htmlBody = renderTechniques(); break;
-        case 'case-studies': htmlBody = renderCaseStudies(); break;
-        case 'timeline': htmlBody = renderTimeline(); break;
-        case 'gallery': htmlBody = renderGallery(); break;
-        case 'glossary': htmlBody = renderGlossary(); break;
-        default: htmlBody = `<div class="page-container page-header"><h1>Section Not Found</h1></div>`;
-    }
-
-    appRoot.innerHTML = htmlBody;
-
-    setTimeout(() => {
-        appRoot.style.opacity = 1;
-        window.scrollTo(0, 0);
-        initScrollReveal();
-        init3DTilt();
-    }, 60);
-}
 
 // ========================================
 // SCROLL REVEAL — 3D ENTRANCE FROM DEPTH
@@ -630,13 +558,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Mobile menu toggle
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenuBtn.classList.toggle('active');
-    navLinksContainer.classList.toggle('active');
-    document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : '';
-});
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        if (navLinksContainer) navLinksContainer.classList.toggle('active');
+        document.body.style.overflow = (navLinksContainer && navLinksContainer.classList.contains('active')) ? 'hidden' : '';
+    });
+}
 
 function buildNavigation() {
+    if (!navLinksContainer) return;
+    navLinksContainer.innerHTML = ''; // Clear to prevent duplication
     siteData.navigation_menu.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `<a href="#${item.id}" class="nav-link" data-id="${item.id}">${item.label}</a>`;
@@ -646,14 +578,14 @@ function buildNavigation() {
 
 // Router
 window.addEventListener('hashchange', () => {
-    loader.classList.remove('hidden');
+    if (loader) loader.classList.remove('hidden');
     appRoot.style.opacity = 0;
 
     setTimeout(() => {
         handleRoute();
-        loader.classList.add('hidden');
-        navLinksContainer.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
+        if (loader) loader.classList.add('hidden');
+        if (navLinksContainer) navLinksContainer.classList.remove('active');
+        if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
         document.body.style.overflow = '';
     }, 400);
 });
@@ -678,13 +610,14 @@ function handleRoute() {
         default: htmlBody = `<div class="page-container page-header"><h1>Section Not Found</h1></div>`;
     }
 
-    appRoot.innerHTML = htmlBody;
-
-    // Animate enter
-    setTimeout(() => {
-        appRoot.style.opacity = 1;
-        window.scrollTo(0, 0);
-        initScrollReveal();
-        init3DTilt();
-    }, 60);
+    if (appRoot) {
+        appRoot.innerHTML = htmlBody;
+        // Animate enter
+        setTimeout(() => {
+            appRoot.style.opacity = 1;
+            window.scrollTo(0, 0);
+            initScrollReveal();
+            init3DTilt();
+        }, 60);
+    }
 }
