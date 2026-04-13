@@ -172,14 +172,14 @@ const siteData = {
             { "term": "Mortise", "definition": "A hole or recess cut into a part, designed to receive a corresponding projection (a tenon)." }
         ],
         "gallery": [
-            "Close-up of a perfectly abutted dry-stack granite joint in Thanjavur.",
-            "Erosion revealing the structural mortise indentations on a fallen pillar.",
-            "An intricately carved butterfly stone key locking two retaining blocks.",
-            "Deep iron chisel tooling marks visible on an unpolished plinth block.",
-            "Cross-section of a damaged block showing a rusted iron cramp.",
-            "Modern conservation: replacing oxidized iron clamps with titanium dowels.",
-            "A monumental lintel suspended via massive squared tenons.",
-            "The continuous interior curve of a dry-stacked corbelled roof."
+            { "caption": "Dry-Stack Granite Joint, Thanjavur", "description": "Close-up of a perfectly abutted dry-stack granite joint — zero gap, pure precision.", "img": "assets/gallery/granite_joint.png" },
+            { "caption": "Mortise Indentations on a Fallen Pillar", "description": "Erosion revealing the structural mortise indentations carved deep into a fallen sandstone pillar.", "img": "assets/gallery/mortise_pillar.png" },
+            { "caption": "Butterfly Stone Key", "description": "An intricately carved butterfly stone key locking two retaining blocks — Hoysala mastery.", "img": "assets/gallery/butterfly_joint.png" },
+            { "caption": "Iron Chisel Tooling Marks", "description": "Deep iron chisel tooling marks visible on an unpolished plinth block — the shilpi's signature.", "img": "assets/gallery/chisel_marks.png" },
+            { "caption": "Rusted Iron Cramp Cross-Section", "description": "Cross-section of a damaged block revealing a rusted iron cramp and the rust-jacking cracks.", "img": "assets/gallery/iron_cramp.png" },
+            { "caption": "Modern Conservation Work", "description": "Replacing oxidized iron clamps with precision-fitted titanium dowels — preserving for millennia.", "img": "assets/gallery/conservation.png" },
+            { "caption": "Monumental Lintel via Squared Tenons", "description": "A massive stone lintel suspended via perfectly carved squared tenons above temple columns.", "img": null },
+            { "caption": "Interior Corbelled Dome Curve", "description": "The continuous, smooth interior curve of a dry-stacked corbelled stone dome — no mortar.", "img": null }
         ]
     }
 };
@@ -321,22 +321,37 @@ window.addEventListener('scroll', () => {
 });
 
 // ========================================
-// SCROLL REVEAL — 3D ENTRANCE FROM DEPTH
+// SCROLL REVEAL — ENTRANCE FROM DEPTH
 // ========================================
 function initScrollReveal() {
+    // Standard reveal elements
     const revealEls = document.querySelectorAll('.reveal');
-    if (!revealEls.length) return;
+    if (revealEls.length) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => observer.observe(el));
+    }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
+    // Timeline items — staggered slide-in from left
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    if (timelineItems.length) {
+        const tlObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Respect the transition-delay already set inline
+                    entry.target.classList.add('visible');
+                    tlObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+        timelineItems.forEach(el => tlObserver.observe(el));
+    }
 }
 
 // ========================================
@@ -347,20 +362,79 @@ function init3DTilt() {
     if (window.matchMedia('(hover: none)').matches) return; // skip on touch
 
     tiltCards.forEach(card => {
+        // Setup 3D transform properties
+        card.style.transformStyle = 'preserve-3d';
+        card.style.willChange = 'transform';
+        
+        // Add glare element if it doesn't already exist
+        let glare = card.querySelector('.glare');
+        if (!glare) {
+            glare = document.createElement('div');
+            glare.classList.add('glare');
+            card.appendChild(glare);
+            
+            // Ensure card is positioned so glare aligns properly
+            if (getComputedStyle(card).position === 'static') {
+                card.style.position = 'relative';
+            }
+        }
+
+        // Apply smooth transition properties for hover enter/leave
+        card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
+        Array.from(card.children).forEach(child => {
+            if (!child.classList.contains('glare')) {
+                child.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            }
+        });
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateY = ((x - centerX) / centerX) * 8;
-            const rotateX = ((centerY - y) / centerY) * 6;
+            
+            // Calculate exaggerated 3D rotation based on mouse position
+            const rotateY = ((x - centerX) / centerX) * 15;
+            const rotateX = ((centerY - y) / centerY) * 15;
 
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            // Apply card rotation and slight scale
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            card.style.zIndex = '10';
+
+            // Popping out children in 3D
+            Array.from(card.children).forEach(child => {
+                if (!child.classList.contains('glare')) {
+                    child.style.transform = 'translateZ(50px)'; // 3D pop effect
+                }
+            });
+            
+            // Update glare position
+            const angle = Math.atan2(y - centerY, x - centerX) * 180 / Math.PI - 90;
+            const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+            const maxDist = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+            const opacity = Math.min((distance / maxDist) * 0.4, 0.6); // dynamically adjust opacity
+            
+            glare.style.background = `linear-gradient(${angle}deg, rgba(255,255,255, ${opacity}) 0%, rgba(255,255,255, 0) 80%)`;
+            glare.style.opacity = '1';
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+            // Reset card transform
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            card.style.zIndex = '1';
+
+            // Reset children transform
+            Array.from(card.children).forEach(child => {
+                if (!child.classList.contains('glare')) {
+                    child.style.transform = 'translateZ(0px)';
+                }
+            });
+            
+            // Hide glare
+            if (glare) {
+                glare.style.opacity = '0';
+            }
         });
     });
 }
@@ -478,16 +552,29 @@ function renderCaseStudies() {
 function renderTimeline() {
     const data = siteData.pages.timeline;
     const timelineHtml = data.map((item, i) => {
-        const [year, ...descParts] = item.split(': ');
-        const desc = descParts.join(': ');
+        const colonIdx = item.indexOf(': ');
+        const year = colonIdx !== -1 ? item.slice(0, colonIdx) : item;
+        const desc = colonIdx !== -1 ? item.slice(colonIdx + 2) : '';
+        const isOdd = i % 2 === 0;
+
+        const card = `
+            <div class="timeline-card">
+                <h3 style="color:var(--accent); font-family:var(--font-heading); font-size:0.95rem; letter-spacing:1px; text-transform:uppercase;">${year}</h3>
+                <p style="color:var(--text-light); font-size:1rem; margin-top:0.5rem; line-height:1.65;">${desc}</p>
+            </div>`;
+        const spacer = `<div class="timeline-spacer"></div>`;
+        const center = `
+            <div class="timeline-center">
+                <div class="timeline-dot"></div>
+                <div class="timeline-connector-dot"></div>
+            </div>`;
+
+        // Odd: card | center | spacer  →  card on left
+        // Even: spacer | center | card  →  card on right
         return `
-            <div class="timeline-item reveal" style="transition-delay: ${i * 0.08}s">
-                <div class="timeline-card">
-                    <h3 style="color:var(--accent); font-family:var(--font-heading);">${year}</h3>
-                    <p style="color:var(--text-light); font-size:1.05rem; margin-top:0.5rem;">${desc}</p>
-                </div>
-            </div>
-        `;
+            <div class="timeline-item" style="transition-delay: ${i * 0.08}s">
+                ${isOdd ? card + center + spacer : spacer + center + card}
+            </div>`;
     }).join('');
 
     return `
@@ -497,6 +584,7 @@ function renderTimeline() {
                 <p>The progression of lithic engineering across the subcontinent over millennia.</p>
             </div>
             <div class="timeline">
+                <div class="timeline-arrow"></div>
                 ${timelineHtml}
             </div>
         </div>
@@ -505,17 +593,31 @@ function renderTimeline() {
 
 function renderGallery() {
     const data = siteData.pages.gallery;
-    const html = data.map((item, i) => `
-        <div class="gallery-item tilt-3d reveal" title="${item}" style="transition-delay: ${i * 0.08}s">
-            <p>${item}</p>
-        </div>
-    `).join('');
+    const html = data.map((item, i) => {
+        if (item.img) {
+            return `
+            <div class="gallery-item tilt-3d reveal" style="transition-delay: ${i * 0.08}s; background-image: url('${item.img}');" title="${item.caption}">
+                <div class="gallery-overlay">
+                    <h4 class="gallery-caption">${item.caption}</h4>
+                    <p class="gallery-desc">${item.description}</p>
+                </div>
+            </div>`;
+        } else {
+            // Fallback for images that couldn't be generated
+            return `
+            <div class="gallery-item gallery-item--placeholder tilt-3d reveal" style="transition-delay: ${i * 0.08}s;" title="${item.caption}">
+                <div class="gallery-placeholder-icon">⬡</div>
+                <h4 class="gallery-caption-static">${item.caption}</h4>
+                <p class="gallery-desc-static">${item.description}</p>
+            </div>`;
+        }
+    }).join('');
 
     return `
         <div class="page-container">
             <div class="page-header reveal">
                 <h1>Visual Archive</h1>
-                <p>A collection of structural joints, tooling marks, and conservation efforts.</p>
+                <p>A curated collection of structural joints, tooling marks, and conservation efforts across the subcontinent.</p>
             </div>
             <div class="gallery-grid">
                 ${html}
