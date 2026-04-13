@@ -144,6 +144,22 @@ const siteData = {
                 "specific_joinery": "Features highly advanced thin bed jointing (2-4 mm) and sophisticated multilayered plastering using a unique hydraulic lime and surkhi matrix.",
                 "structural_analysis": "The binder-to-aggregate ratio is remarkably rich at 1:0.4 to 1:0.8, with mineralogy consisting largely of Calcite (63-84%). Using organic fibers, the masons structurally reinforced the plaster layers to prevent shrinkage cracking.",
                 "conservation_challenges": "Surface flaking induced by salt crystallization and gypsum accumulation from weathering, requiring precise chemical replication of the original lime mortar for restoration."
+            },
+            {
+                "title": "Brihadisvara Temple, Thanjavur",
+                "img": "assets/case_studies/brihadisvara.png",
+                "historical_context": "Completed in 1010 CE by the Chola dynasty, this towering architectural marvel represents the pinnacle of ancient Dravidian architecture.",
+                "specific_joinery": "Constructed almost entirely from massive interlocking blocks of granite without any binding mortar. The astonishing precision of the dry-stacked jointing allows the heavy ashlar blocks to sit perfectly flush.",
+                "structural_analysis": "The incredible weight of the superstructure (the vimana) creates immense downward compressive force that frictionally locks the interlocking blocks in place, allowing the tower to stand rigid against centuries of monsoons and seismic activity.",
+                "conservation_challenges": "Protecting the monolithic stones from acid rain and mitigating structural vibration from modern surrounding infrastructure."
+            },
+            {
+                "title": "Kandariya Mahadeva Temple, Khajuraho",
+                "img": "assets/case_studies/kandariya.png",
+                "historical_context": "Built symmetrically around 1050 CE by the Chandela dynasty, this temple embodies the zenith of central Indian temple architecture.",
+                "specific_joinery": "The soaring vertical spires (shikharas) are supported by extremely complex mortarless interlocking sandstone joints, heavily reinforced with a concealed network of forged iron cramps and horizontal dowels.",
+                "structural_analysis": "To achieve such breathtaking verticality without arches or widespread interior columns, the master masons relied on rigorous geometric corbelling and iron-clamping to pull the massive vertical forms inward.",
+                "conservation_challenges": "Inert iron oxidation (rust jacking) deep inside the masonry joints causing outward expansion and cracking of the ornate sandstone facade."
             }
         ],
         "timeline": [
