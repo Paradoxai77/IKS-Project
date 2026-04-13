@@ -178,8 +178,8 @@ const siteData = {
             { "caption": "Iron Chisel Tooling Marks", "description": "Deep iron chisel tooling marks visible on an unpolished plinth block â€” the shilpi's signature.", "img": "assets/gallery/chisel_marks.png" },
             { "caption": "Rusted Iron Cramp Cross-Section", "description": "Cross-section of a damaged block revealing a rusted iron cramp and the rust-jacking cracks.", "img": "assets/gallery/iron_cramp.png" },
             { "caption": "Modern Conservation Work", "description": "Replacing oxidized iron clamps with precision-fitted titanium dowels â€” preserving for millennia.", "img": "assets/gallery/conservation.png" },
-            { "caption": "Monumental Lintel via Squared Tenons", "description": "A massive stone lintel suspended via perfectly carved squared tenons above temple columns.", "img": null },
-            { "caption": "Interior Corbelled Dome Curve", "description": "The continuous, smooth interior curve of a dry-stacked corbelled stone dome â€” no mortar.", "img": null }
+            { "caption": "Monumental Lintel via Squared Tenons", "description": "A massive stone lintel suspended via perfectly carved squared tenons above temple columns.", "img": "assets/gallery/lintel_tenons.png" },
+            { "caption": "Interior Corbelled Dome Curve", "description": "The continuous, smooth interior curve of a dry-stacked corbelled stone dome â€” no mortar.", "img": "assets/gallery/corbelled_dome.png" }
         ],
         "resources": [
             { "title": "Indian rock-cut architecture", "url": "https://en.wikipedia.org/wiki/Indian_rock-cut_architecture", "description": "Wikipedia article detailing the history and methods of rock-cut architecture, such as the elaborate rock-cut temples seen at Ellora." },
