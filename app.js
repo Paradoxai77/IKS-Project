@@ -1,4 +1,4 @@
-﻿const siteData = {
+const siteData = {
     "site_overview": {
         "mission": "To document and preserve the intricate stone joinery techniques of Ancient India, inspiring modern craft and informing archaeological conservation.",
         "target_audience": "Historians, architects, conservators, craftspersons, and the curious public."
@@ -180,6 +180,12 @@
             { "caption": "Modern Conservation Work", "description": "Replacing oxidized iron clamps with precision-fitted titanium dowels â€” preserving for millennia.", "img": "assets/gallery/conservation.png" },
             { "caption": "Monumental Lintel via Squared Tenons", "description": "A massive stone lintel suspended via perfectly carved squared tenons above temple columns.", "img": null },
             { "caption": "Interior Corbelled Dome Curve", "description": "The continuous, smooth interior curve of a dry-stacked corbelled stone dome â€” no mortar.", "img": null }
+        ],
+        "resources": [
+            { "title": "Indian rock-cut architecture", "url": "https://en.wikipedia.org/wiki/Indian_rock-cut_architecture", "description": "Wikipedia article detailing the history and methods of rock-cut architecture, such as the elaborate rock-cut temples seen at Ellora." },
+            { "title": "Hindu temple architecture", "url": "https://en.wikipedia.org/wiki/Hindu_temple_architecture", "description": "Comprehensive overview of the evolution, structural elements, and regional variations in Hindu temple construction." },
+            { "title": "Ancient Indian architecture", "url": "https://en.wikipedia.org/wiki/Ancient_Indian_architecture", "description": "Covers architectural developments from the Indus Valley Civilization to the medieval period, highlighting major structural typologies." },
+            { "title": "Stepwell", "url": "https://en.wikipedia.org/wiki/Stepwell", "description": "Information on the complex subterranean water structures of western India, focusing on structural reinforcement using stone joinery." }
         ]
     }
 };
@@ -582,6 +588,29 @@ function renderGlossary() {
     `;
 };
 
+function renderResources() {
+    const data = siteData.pages.resources || [];
+    const html = data.map((r, i) => `
+        <div class="glass-card reveal" style="transition-delay: ${i * 0.05}s; background:var(--surface-light); padding:1.5rem; border-radius:var(--radius); border:1px solid var(--border)">
+            <h3 style="margin-bottom: 0.5rem; color:var(--accent);"><a href="${r.url}" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none;">${r.title} &rarr;</a></h3>
+            <p style="color:var(--text-main);">${r.description}</p>
+        </div>
+    `).join('');
+
+    return `
+        <div class="page-container">
+            <div class="page-header reveal">
+                <p class="section-label" style="justify-content:center;">Resources</p>
+                <h1>External References</h1>
+                <p>Curated Wikipedia articles for further reading on ancient Indian masonry.</p>
+            </div>
+            <div class="grid-2">
+                ${html}
+            </div>
+        </div>
+    `;
+}
+
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
     // Priority: ensure the site always unloads the spinner
@@ -643,6 +672,7 @@ function handleRoute() {
         case 'timeline': htmlBody = renderTimeline(); break;
         case 'gallery': htmlBody = renderGallery(); break;
         case 'glossary': htmlBody = renderGlossary(); break;
+        case 'resources': htmlBody = renderResources(); break;
         default: htmlBody = `<div class="page-container page-header"><h1>Section Not Found</h1></div>`;
     }
 
