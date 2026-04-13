@@ -1,4 +1,4 @@
-const siteData = {
+﻿const siteData = {
     "site_overview": {
         "mission": "To document and preserve the intricate stone joinery techniques of Ancient India, inspiring modern craft and informing archaeological conservation.",
         "target_audience": "Historians, architects, conservators, craftspersons, and the curious public."
@@ -18,7 +18,7 @@ const siteData = {
                 "headline": "Monuments Without Mortar: The Mastery of Ancient Indian Stonecraft",
                 "subhead": "Uncover the precision of traditional Indian masons, whose sophisticated interlocking stone joinery built temples and stepwells that have defied time, gravity, and earthquakes for millennia."
             },
-            "intro": "What is stone joinery? Long before modern cements and rebar, ancient Indian architects constructed staggering monumental superstructures using purely physical connections between stone blocks. This is the art and science of stone joinery: using gravity, friction, and meticulously carved interlocking shapes—such as tenons, dovetails, and mortises—to bind individual blocks into unyielding monolithic entities. \n\nAncient Indian techniques are recognized globally for their exceptional seismic resilience and extraordinary precision. On this platform, we illuminate the profound ingenuity of the subcontinental master masons (shilpis). Here, you will find comprehensive technique pages categorizing historical joint forms, in-depth architectural case studies, a dedicated glossary, and downloadable diagrams for conservationists and students.",
+            "intro": "What is stone joinery? Long before modern cements and rebar, ancient Indian architects constructed staggering monumental superstructures using purely physical connections between stone blocks. This is the art and science of stone joinery: using gravity, friction, and meticulously carved interlocking shapesâ€”such as tenons, dovetails, and mortisesâ€”to bind individual blocks into unyielding monolithic entities. \n\nAncient Indian techniques are recognized globally for their exceptional seismic resilience and extraordinary precision. On this platform, we illuminate the profound ingenuity of the subcontinental master masons (shilpis). Here, you will find comprehensive technique pages categorizing historical joint forms, in-depth architectural case studies, a dedicated glossary, and downloadable diagrams for conservationists and students.",
             "quick_links": [
                 { "id": "techniques", "label": "Techniques", "description": "Explore detailed breakdowns of historical interlocking joints and dowel implementations." },
                 { "id": "case-studies", "label": "Case Studies", "description": "Analyze the structural ingenuity of iconic temples and monumental stepwells." },
@@ -116,7 +116,7 @@ const siteData = {
             {
                 "title": "Kailasa Temple, Ellora",
                 "historical_context": "Excavated top-down in the 8th century by Rashtrakuta kings, this represents the ultimate subversion of stone 'joinery'. Instead of adding blocks together, the entire structure was carved from a single living rock outcropping.",
-                "specific_joinery": "While technically a monolithic structure lacking traditional masonry joints, the 'joinery' exists conceptually in its rock-cut architectural analogues. Sculptors meticulously replicated wooden joinery forms—joists, beams, and tenons—purely as aesthetic skeuomorphs.",
+                "specific_joinery": "While technically a monolithic structure lacking traditional masonry joints, the 'joinery' exists conceptually in its rock-cut architectural analogues. Sculptors meticulously replicated wooden joinery formsâ€”joists, beams, and tenonsâ€”purely as aesthetic skeuomorphs.",
                 "structural_analysis": "The structural integrity relies wholly on the natural basalt flow. The genius lies in negative-space architectural planning.",
                 "conservation_challenges": "Weathering of the porous basalt and micro-fissures in the natural rock bed."
             },
@@ -149,12 +149,12 @@ const siteData = {
             "5th Century CE: Gupta Period; first widespread use of structural dry-stone temples using simple, massive ashlar masonry.",
             "7th Century CE: Pallava rock-cut rathas at Mahabalipuram; refined simulation of complex joinery.",
             "8th Century CE: Kailasa Temple at Ellora; monolithic architectural achievement defining structural load paths.",
-            "10th–11th Century CE: Chandela (Khajuraho) and Solanki (Gujarat); mastery of interlocking sandstones, iron cramping.",
+            "10thâ€“11th Century CE: Chandela (Khajuraho) and Solanki (Gujarat); mastery of interlocking sandstones, iron cramping.",
             "11th Century CE: Chola Empire (Thanjavur); mastery of monumental granite mortise and tenon integration without mortar.",
             "13th Century CE: Eastern Ganga (Konark); massive scale structural iron beams supplementing heavy masonry.",
             "16th Century CE: Vijayanagara Empire; highly intricate compound pillars with internal pin-locking systems.",
             "19th Century CE: Colonial-era documentation by the ASI; first modern drafting of these joints.",
-            "20th–21st Century CE: Modern conservation era; structural diagnostics, iron-clamp removal, and anastylosis."
+            "20thâ€“21st Century CE: Modern conservation era; structural diagnostics, iron-clamp removal, and anastylosis."
         ],
         "glossary": [
             { "term": "Abutment", "definition": "A zero-gap contact point where two large structural stone blocks meet." },
@@ -172,14 +172,14 @@ const siteData = {
             { "term": "Mortise", "definition": "A hole or recess cut into a part, designed to receive a corresponding projection (a tenon)." }
         ],
         "gallery": [
-            { "caption": "Dry-Stack Granite Joint, Thanjavur", "description": "Close-up of a perfectly abutted dry-stack granite joint — zero gap, pure precision.", "img": "assets/gallery/granite_joint.png" },
+            { "caption": "Dry-Stack Granite Joint, Thanjavur", "description": "Close-up of a perfectly abutted dry-stack granite joint â€” zero gap, pure precision.", "img": "assets/gallery/granite_joint.png" },
             { "caption": "Mortise Indentations on a Fallen Pillar", "description": "Erosion revealing the structural mortise indentations carved deep into a fallen sandstone pillar.", "img": "assets/gallery/mortise_pillar.png" },
-            { "caption": "Butterfly Stone Key", "description": "An intricately carved butterfly stone key locking two retaining blocks — Hoysala mastery.", "img": "assets/gallery/butterfly_joint.png" },
-            { "caption": "Iron Chisel Tooling Marks", "description": "Deep iron chisel tooling marks visible on an unpolished plinth block — the shilpi's signature.", "img": "assets/gallery/chisel_marks.png" },
+            { "caption": "Butterfly Stone Key", "description": "An intricately carved butterfly stone key locking two retaining blocks â€” Hoysala mastery.", "img": "assets/gallery/butterfly_joint.png" },
+            { "caption": "Iron Chisel Tooling Marks", "description": "Deep iron chisel tooling marks visible on an unpolished plinth block â€” the shilpi's signature.", "img": "assets/gallery/chisel_marks.png" },
             { "caption": "Rusted Iron Cramp Cross-Section", "description": "Cross-section of a damaged block revealing a rusted iron cramp and the rust-jacking cracks.", "img": "assets/gallery/iron_cramp.png" },
-            { "caption": "Modern Conservation Work", "description": "Replacing oxidized iron clamps with precision-fitted titanium dowels — preserving for millennia.", "img": "assets/gallery/conservation.png" },
+            { "caption": "Modern Conservation Work", "description": "Replacing oxidized iron clamps with precision-fitted titanium dowels â€” preserving for millennia.", "img": "assets/gallery/conservation.png" },
             { "caption": "Monumental Lintel via Squared Tenons", "description": "A massive stone lintel suspended via perfectly carved squared tenons above temple columns.", "img": null },
-            { "caption": "Interior Corbelled Dome Curve", "description": "The continuous, smooth interior curve of a dry-stacked corbelled stone dome — no mortar.", "img": null }
+            { "caption": "Interior Corbelled Dome Curve", "description": "The continuous, smooth interior curve of a dry-stacked corbelled stone dome â€” no mortar.", "img": null }
         ]
     }
 };
@@ -191,126 +191,16 @@ const appRoot = document.getElementById('app-root');
 const navLinksContainer = document.getElementById('nav-links');
 const loader = document.getElementById('loader');
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mouseGlow = document.getElementById('mouse-glow');
-const particleCanvas = document.getElementById('particle-canvas');
 const navbar = document.getElementById('navbar');
 
-// ========================================
-// 3D PARTICLE FIELD
-// ========================================
-const ctx = particleCanvas ? particleCanvas.getContext('2d') : null;
-let particles = [];
+// Particles disabled â€” heritage theme uses clean light background
 let mouseX = 0, mouseY = 0;
-const PARTICLE_COUNT = 60;
+function animateParticles() {} // no-op
 
-function resizeCanvas() {
-    if (!particleCanvas) return;
-    particleCanvas.width = window.innerWidth;
-    particleCanvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-class Particle {
-    constructor() {
-        this.reset();
-    }
-    reset() {
-        if (!particleCanvas) return;
-        this.x = Math.random() * particleCanvas.width;
-        this.y = Math.random() * particleCanvas.height;
-        this.z = Math.random() * 1000;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedY = -Math.random() * 0.3 - 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.2;
-        this.opacity = Math.random() * 0.4 + 0.1;
-    }
-    update() {
-        if (!particleCanvas) return;
-        this.y += this.speedY;
-        this.x += this.speedX;
-        this.z -= 0.5;
-
-        // Parallax with mouse
-        const dx = (mouseX - particleCanvas.width / 2) * 0.00005 * this.z;
-        const dy = (mouseY - particleCanvas.height / 2) * 0.00005 * this.z;
-        this.x += dx;
-        this.y += dy;
-
-        if (this.y < -10 || this.z < 0) this.reset();
-        if (this.y > particleCanvas.height + 10) { this.y = -10; }
-    }
-    draw() {
-        if (!ctx) return;
-        const scale = (1000 - this.z) / 1000;
-        const r = this.size * scale;
-        const a = this.opacity * scale;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, Math.max(r, 0.3), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(216, 160, 92, ${a})`;
-        ctx.fill();
-    }
-}
-
-if (particleCanvas) {
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push(new Particle());
-    }
-    animateParticles();
-}
-
-function animateParticles() {
-    if (!ctx || !particleCanvas) return;
-    ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-
-    // Draw connections between close particles
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-                const opacity = (1 - dist / 120) * 0.08;
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(216, 160, 92, ${opacity})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-            }
-        }
-    }
-
-    particles.forEach(p => {
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animateParticles);
-}
-
-// ========================================
-// MOUSE GLOW FOLLOWER
-// ========================================
-let glowActive = false;
+// Mouse tracking (kept for future use but glow is disabled)
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-
-    if (mouseGlow) {
-        mouseGlow.style.left = e.clientX + 'px';
-        mouseGlow.style.top = e.clientY + 'px';
-
-        if (!glowActive) {
-            mouseGlow.classList.add('visible');
-            glowActive = true;
-        }
-    }
-});
-document.addEventListener('mouseleave', () => {
-    if (mouseGlow) {
-        mouseGlow.classList.remove('visible');
-        glowActive = false;
-    }
 });
 
 // ========================================
@@ -321,7 +211,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ========================================
-// SCROLL REVEAL — ENTRANCE FROM DEPTH
+// SCROLL REVEAL â€” ENTRANCE FROM DEPTH
 // ========================================
 function initScrollReveal() {
     // Standard reveal elements
@@ -338,7 +228,7 @@ function initScrollReveal() {
         revealEls.forEach(el => observer.observe(el));
     }
 
-    // Timeline items — staggered slide-in from left
+    // Timeline items â€” staggered slide-in from left
     const timelineItems = document.querySelectorAll('.timeline-item');
     if (timelineItems.length) {
         const tlObserver = new IntersectionObserver((entries) => {
@@ -444,12 +334,18 @@ function init3DTilt() {
 // ========================================
 function renderHome() {
     const data = siteData.pages.home;
+    const overview = siteData.pages.techniques_overview;
+    const introParagraphs = data.intro.split('\n\n').map(p => `<p>${p}</p>`).join('');
+
+    // Quick-nav cards
+    const cardIcons = ['ðŸ›ï¸', 'ðŸ—ï¸', 'ðŸ“¥'];
     const cardsHtml = data.quick_links.map((q, i) => `
-        <div class="glass-card tilt-3d reveal" style="transition-delay: ${i * 0.15}s">
+        <div class="glass-card reveal" style="transition-delay: ${i * 0.15}s">
+            <div class="card-icon">${cardIcons[i] || 'ðŸ”·'}</div>
             <h3>${q.label}</h3>
             <p>${q.description}</p>
             <br/>
-            <a href="#${q.id}" class="btn">Explore</a>
+            <a href="#${q.id}" class="btn">Explore &rarr;</a>
         </div>
     `).join('');
 
@@ -458,14 +354,35 @@ function renderHome() {
             <div class="hero-content">
                 <h1 class="hero-title">${data.hero.headline}</h1>
                 <p class="hero-subtitle">${data.hero.subhead}</p>
+                <a href="#techniques" class="btn">Discover Techniques &rarr;</a>
             </div>
         </section>
-        <section class="page-container" style="padding-top: 0;">
-            <div class="article-content reveal" style="text-align: center; margin-bottom: 4rem;">
-                <p>${data.intro}</p>
+
+        <section class="home-intro">
+            <div class="home-intro-inner">
+                <div class="home-intro-text reveal">
+                    <p class="section-label">About This Platform</p>
+                    <h2 class="heading-underline">What is Stone Joinery?</h2>
+                    <br/>
+                    ${introParagraphs}
+                </div>
+                <div class="home-intro-sidebar reveal" style="transition-delay: 0.2s">
+                    <h4>Traditional Tools &amp; Materials</h4>
+                    <p>${overview.sidebar}</p>
+                </div>
             </div>
-            <div class="grid-3 quick-links">
-                ${cardsHtml}
+        </section>
+
+        <section class="quick-links-section">
+            <div class="quick-links-inner">
+                <div class="section-title-row reveal">
+                    <p class="section-label">Explore</p>
+                    <h2 style="font-size:2rem; color:var(--text-dark); margin-bottom:0.5rem;">Our Signature Sections</h2>
+                    <p style="color:var(--text-muted); max-width:560px;">Navigate through the study of ancient Indian lithic engineering.</p>
+                </div>
+                <div class="grid-3">
+                    ${cardsHtml}
+                </div>
             </div>
         </section>
     `;
@@ -478,21 +395,32 @@ function renderTechniques() {
     const techHtml = data.map((t, i) => {
         const stepsHtml = t.step_by_step.map(step => `<li>${step}</li>`).join('');
         return `
-            <div class="glass-card tilt-3d reveal" style="margin-bottom: 3rem; transition-delay: ${i * 0.1}s">
-                <h2 style="color:var(--accent); font-size: 2rem; margin-bottom: 1rem;">${t.name}</h2>
-                <div class="grid-2">
-                    <div>
-                        <p><strong>Historical Examples:</strong> ${t.historical_examples}</p>
-                        <p><strong>Materials & Tools:</strong> ${t.materials_and_tools}</p>
-                        <br/>
-                        <p><strong>Structural Advantages:</strong> ${t.structural_advantages}</p>
-                        ${t.conservation_notes ? `<br/><p style="color:#f0bc78"><strong>Conservation Notes:</strong> ${t.conservation_notes}</p>` : ''}
-                    </div>
-                    <div>
-                        <h4 style="margin-bottom:1rem; color:var(--text-light)">Construction Method:</h4>
-                        <ol class="step-list">
-                            ${stepsHtml}
-                        </ol>
+            <div class="technique-card reveal" style="transition-delay: ${i * 0.1}s">
+                <div class="technique-header">
+                    <div class="technique-number">${i + 1}</div>
+                    <h2>${t.name}</h2>
+                </div>
+                <div class="technique-body">
+                    <div class="grid-2">
+                        <div>
+                            <div style="margin-bottom:1.25rem;">
+                                <span class="info-badge">Historical Examples</span>
+                                <p style="margin-top:0.4rem;">${t.historical_examples}</p>
+                            </div>
+                            <div style="margin-bottom:1.25rem;">
+                                <span class="info-badge">Materials &amp; Tools</span>
+                                <p style="margin-top:0.4rem;">${t.materials_and_tools}</p>
+                            </div>
+                            <div style="margin-bottom:1.25rem;">
+                                <span class="info-badge">Structural Advantages</span>
+                                <p style="margin-top:0.4rem;">${t.structural_advantages}</p>
+                            </div>
+                            ${t.conservation_notes ? `<div class="conservation-note"><p><strong>Conservation Notes:</strong> ${t.conservation_notes}</p></div>` : ''}
+                        </div>
+                        <div>
+                            <p class="section-label" style="margin-bottom:1rem;">Construction Method</p>
+                            <ol class="step-list">${stepsHtml}</ol>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -502,11 +430,9 @@ function renderTechniques() {
     return `
         <div class="page-container">
             <div class="page-header reveal">
+                <p class="section-label" style="justify-content:center;">Techniques</p>
                 <h1>${overview.title}</h1>
-                <p>${overview.body}</p>
-                <div class="reveal" style="margin-top:2rem; padding: 1.5rem; border: 1px solid var(--accent); border-radius: 8px; background: rgba(216,160,92,0.05)">
-                    <em>${overview.sidebar}</em>
-                </div>
+                <p>${overview.body.slice(0, 220)}...</p>
             </div>
             <div class="techniques-list">
                 ${techHtml}
@@ -514,24 +440,30 @@ function renderTechniques() {
         </div>
     `;
 }
-
 function renderCaseStudies() {
     const data = siteData.pages.case_studies;
     const cardsHtml = data.map((c, i) => `
-        <div class="glass-card tilt-3d reveal" style="transition-delay: ${i * 0.12}s">
-            <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">${c.title}</h2>
-            <div style="margin-bottom: 1.5rem;">
-                <h4 style="color:#fff; margin-top:1rem;">Historical Context</h4>
-                <p>${c.historical_context}</p>
-
-                <h4 style="color:#fff; margin-top:1rem;">Specific Joinery</h4>
-                <p>${c.specific_joinery}</p>
-
-                <h4 style="color:#fff; margin-top:1rem;">Structural Analysis</h4>
-                <p>${c.structural_analysis}</p>
-
-                <h4 style="color:var(--accent); margin-top:1rem;">Conservation Challenges</h4>
-                <p>${c.conservation_challenges}</p>
+        <div class="case-study-card reveal" style="transition-delay: ${i * 0.12}s">
+            <div class="case-study-header">
+                <h2>${c.title}</h2>
+            </div>
+            <div class="case-study-body">
+                <div class="study-section">
+                    <h4>Historical Context</h4>
+                    <p>${c.historical_context}</p>
+                </div>
+                <div class="study-section">
+                    <h4>Specific Joinery</h4>
+                    <p>${c.specific_joinery}</p>
+                </div>
+                <div class="study-section">
+                    <h4>Structural Analysis</h4>
+                    <p>${c.structural_analysis}</p>
+                </div>
+                <div class="study-section">
+                    <h4>Conservation Challenges</h4>
+                    <p>${c.conservation_challenges}</p>
+                </div>
             </div>
         </div>
     `).join('');
@@ -539,6 +471,7 @@ function renderCaseStudies() {
     return `
         <div class="page-container">
             <div class="page-header reveal">
+                <p class="section-label" style="justify-content:center;">Case Studies</p>
                 <h1>Monument Case Studies</h1>
                 <p>In-depth architectural analysis of the subcontinent's most iconic structural achievements.</p>
             </div>
@@ -560,7 +493,7 @@ function renderTimeline() {
         const card = `
             <div class="timeline-card">
                 <h3 style="color:var(--accent); font-family:var(--font-heading); font-size:0.95rem; letter-spacing:1px; text-transform:uppercase;">${year}</h3>
-                <p style="color:var(--text-light); font-size:1rem; margin-top:0.5rem; line-height:1.65;">${desc}</p>
+                <p style="color:var(--text-main); font-size:1rem; margin-top:0.5rem; line-height:1.65;">${desc}</p>
             </div>`;
         const spacer = `<div class="timeline-spacer"></div>`;
         const center = `
@@ -569,8 +502,8 @@ function renderTimeline() {
                 <div class="timeline-connector-dot"></div>
             </div>`;
 
-        // Odd: card | center | spacer  →  card on left
-        // Even: spacer | center | card  →  card on right
+        // Odd: card | center | spacer  â†’  card on left
+        // Even: spacer | center | card  â†’  card on right
         return `
             <div class="timeline-item" style="transition-delay: ${i * 0.08}s">
                 ${isOdd ? card + center + spacer : spacer + center + card}
@@ -606,7 +539,7 @@ function renderGallery() {
             // Fallback for images that couldn't be generated
             return `
             <div class="gallery-item gallery-item--placeholder tilt-3d reveal" style="transition-delay: ${i * 0.08}s;" title="${item.caption}">
-                <div class="gallery-placeholder-icon">⬡</div>
+                <div class="gallery-placeholder-icon">â¬¡</div>
                 <h4 class="gallery-caption-static">${item.caption}</h4>
                 <p class="gallery-desc-static">${item.description}</p>
             </div>`;
@@ -638,6 +571,7 @@ function renderGlossary() {
     return `
         <div class="page-container">
             <div class="page-header reveal">
+                <p class="section-label" style="justify-content:center;">Glossary</p>
                 <h1>Technical Glossary</h1>
                 <p>Essential terminology for historic masonry and stone conservation.</p>
             </div>
