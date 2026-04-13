@@ -1076,11 +1076,13 @@ footer {
 
   .gallery-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
   .gallery-item {
-    height: 160px;
-    padding: 1rem;
-    font-size: 0.85rem;
+    min-height: 220px;
+    height: auto;
+    padding: 1.25rem;
+    font-size: 0.9rem;
   }
 
   .glossary-grid {
