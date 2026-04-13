@@ -396,9 +396,12 @@ a:hover {
   flex-direction: row;
   transform: translateX(-40px);
 }
-.timeline-item.visible {
+/* .visible must beat nth-child specificity — use same specificity level */
+.timeline-item.visible,
+.timeline-item:nth-child(odd).visible,
+.timeline-item:nth-child(even).visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) !important;
 }
 
 /* Card — takes up ~45% width on each side */
