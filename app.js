@@ -115,6 +115,7 @@ const siteData = {
         "case_studies": [
             {
                 "title": "Kailasa Temple, Ellora",
+                "img": "assets/case_studies/kailasa.png",
                 "historical_context": "Excavated top-down in the 8th century by Rashtrakuta kings, this represents the ultimate subversion of stone 'joinery'. Instead of adding blocks together, the entire structure was carved from a single living rock outcropping.",
                 "specific_joinery": "While technically a monolithic structure lacking traditional masonry joints, the 'joinery' exists conceptually in its rock-cut architectural analogues. Sculptors meticulously replicated wooden joinery formsâ€”joists, beams, and tenonsâ€”purely as aesthetic skeuomorphs.",
                 "structural_analysis": "The structural integrity relies wholly on the natural basalt flow. The genius lies in negative-space architectural planning.",
@@ -122,6 +123,7 @@ const siteData = {
             },
             {
                 "title": "Sun Temple, Konark",
+                "img": "assets/case_studies/sun_temple.png",
                 "historical_context": "Built in the 13th century in Odisha, this monumental chariot-shaped temple pushed the limits of Khondalite stone masonry and iron-tool engineering.",
                 "specific_joinery": "Renowned for its massive iron beams, Konark used forged iron to supplement stone joinery. The massive corbelled sanctuaries were held together with extensive networks of double-dovetail iron cramps sealed in lead, keeping the huge ashlar blocks from buckling radially.",
                 "structural_analysis": "The temple achieved massive interior space via an elaborate corbelled dome framework supported laterally by iron bindings.",
@@ -129,6 +131,7 @@ const siteData = {
             },
             {
                 "title": "Rani Ki Vav, Patan",
+                "img": "assets/case_studies/rani_ki_vav.png",
                 "historical_context": "An 11th-century monumental stepwell in Gujarat, descending seven levels underground.",
                 "specific_joinery": "Features complex interlocking stone brackets, butterfly joints, and lap joints to manage the immense inward pressure of the surrounding earth. Every stone acts laterally against its neighbor to form an inward-pressing, self-stabilizing box.",
                 "structural_analysis": "Its subterranean nature means it experiences immense lateral soil thrust rather than wind load.",
@@ -136,6 +139,7 @@ const siteData = {
             },
             {
                 "title": "Nalanda University, Bihar",
+                "img": "assets/case_studies/nalanda.png",
                 "historical_context": "A 1600-year-old renowned Buddhist University and UNESCO World Heritage site, built primarily of burnt brick masonry.",
                 "specific_joinery": "Features highly advanced thin bed jointing (2-4 mm) and sophisticated multilayered plastering using a unique hydraulic lime and surkhi matrix.",
                 "structural_analysis": "The binder-to-aggregate ratio is remarkably rich at 1:0.4 to 1:0.8, with mineralogy consisting largely of Calcite (63-84%). Using organic fibers, the masons structurally reinforced the plaster layers to prevent shrinkage cracking.",
@@ -449,8 +453,9 @@ function renderTechniques() {
 function renderCaseStudies() {
     const data = siteData.pages.case_studies;
     const cardsHtml = data.map((c, i) => `
-        <div class="case-study-card reveal" style="transition-delay: ${i * 0.12}s">
-            <div class="case-study-header">
+        <div class="case-study-card reveal" style="transition-delay: ${i * 0.12}s; overflow: hidden;">
+            ${c.img ? `<img src="${c.img}" alt="${c.title}" style="width: 100%; height: 260px; object-fit: cover; display: block; border-bottom: 2px solid var(--accent); margin-bottom: 1.5rem;" />` : ''}
+            <div class="case-study-header" style="${!c.img ? 'padding-top: 1.5rem;' : ''}">
                 <h2>${c.title}</h2>
             </div>
             <div class="case-study-body">
